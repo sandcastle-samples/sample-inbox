@@ -7,12 +7,17 @@ const
     realtime    = require( './lib/realtime' ),
     config      = require( './lib/helpers/config' );
 
-// Server
-let server = http.Server(api.callback());
 
-// Socket.io
-realtime.init(server);
+// Bootstrap rethinkdb
+require('./lib/helpers/rethinkdb').bootstrap().then(function(){
 
-// Listen
-server.listen(process.env.PORT || config.port);
-console.log( 'Listening on port', process.env.PORT || '14320' );
+    // Server
+    let server = http.Server(api.callback());
+
+    // Socket.io
+    realtime.init(server);
+
+    // Listen
+    server.listen(process.env.PORT || config.port);
+    console.log( 'Listening on port', process.env.PORT || '14320' );
+});
