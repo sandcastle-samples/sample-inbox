@@ -1,0 +1,13 @@
+<div class="container" ng-controller="userCreateController as vm">
+
+    <h3>Create User</h3>
+
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" ng-model="vm.item.username" required>
+        </div>
+        <button ng-click="vm.create()">Create</button>
+    </form>
+
+</div>
