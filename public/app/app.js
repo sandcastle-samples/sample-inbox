@@ -150,12 +150,16 @@ app.controller('userListController', function($scope, bindTable){
 });
 
 
-app.controller('messageCreateController', function(){
+app.controller('messageCreateController', function($scope){
 
     var vm = this;
     vm.item = {};
 
     vm.create = function(form){
+
+        if (!vm.item.text){
+            return;
+        }
 
         $.ajax({
             type: 'POST',
@@ -169,6 +173,7 @@ app.controller('messageCreateController', function(){
     function success(){
         // reset
         vm.item = {};
+        $scope.$apply();
     }
 });
 
